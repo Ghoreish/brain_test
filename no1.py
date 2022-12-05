@@ -11,14 +11,15 @@ class Neuron:
         self.connections.append(x)
 
     def connector(self, neuron_list):
-        n = random.randint(0, len(neuron_list))
+        n = random.randint(1, len(neuron_list))
         self.connection_no_list = []
-        for i in range(n):
-            selecter_no = random.randint(0, len(neuron_list) - 1)
-            selected = neuron_list[selecter_no]
-            if selected != self and selected not in self.connections and self not in selected.connections:
-                self.connect_to(selected)
-                self.connection_no_list.append(selecter_no)
+        while self.connection_no_list == []:
+            for i in range(n):
+                selecter_no = random.randint(0, len(neuron_list) - 1)
+                selected = neuron_list[selecter_no]
+                if selected != self:
+                    self.connect_to(selected)
+                    self.connection_no_list.append(selecter_no)
 
     def send_pulse(self):
         n = len(self.connections)
@@ -82,6 +83,10 @@ while True:
             l = ''
             n = 0
     print('\n\n')
+    time.sleep(1)
     b.start_pulsing()
-    for i in range(2):
-        b.pulse_to(i)
+
+
+
+
+
