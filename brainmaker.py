@@ -1,5 +1,6 @@
 import random
 
+
 class Neuron:
     def __init__(self):
         self.vol = 0
@@ -33,6 +34,7 @@ class Neuron:
             if self.vol < 2:
                 break
 
+
 class Brain:
     def __init__(self, n):
         self.neuron_list = []
@@ -48,8 +50,8 @@ class Brain:
             selecter = self.neuron_list[i]
             self.synaps.append((i, selecter.connection_no_list))
 
-    def pulse_to(self, n):
-        self.neuron_list[n].vol += 10
+    def pulse_to(self, n, v=10):
+        self.neuron_list[n].vol += v
 
     def start_pulsing(self):
         for i in self.neuron_list:
@@ -63,7 +65,6 @@ class Brain:
         self.synaps = connection_list
 
 
-
 def breed(x: Brain, y: Brain):
     neuron_len = len(x.neuron_list)
     z = Brain(neuron_len)
@@ -71,6 +72,7 @@ def breed(x: Brain, y: Brain):
     new_synaps = x.synaps[:slicer] + y.synaps[slicer:]
     z.make_custom_connection(new_synaps)
     return z
+
 
 def mut(x: Brain):
     neuron_len = len(x.neuron_list)
@@ -82,8 +84,3 @@ def mut(x: Brain):
     l[random_selected] = y.synaps[random_selected]
     z.make_custom_connection(l)
     return z
-
-
-
-
-
