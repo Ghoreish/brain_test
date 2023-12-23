@@ -61,3 +61,29 @@ class Brain:
             for j in y:
                 x.connect_to(self.neuron_list[j])
         self.synaps = connection_list
+
+
+
+def breed(x: Brain, y: Brain):
+    neuron_len = len(x.neuron_list)
+    z = Brain(neuron_len)
+    slicer = random.randint(0, neuron_len - 1)
+    new_synaps = x.synaps[:slicer] + y.synaps[slicer:]
+    z.make_custom_connection(new_synaps)
+    return z
+
+def mut(x: Brain):
+    neuron_len = len(x.neuron_list)
+    random_selected = random.randint(0, neuron_len - 1)
+    y = Brain(neuron_len)
+    y.make_random_cnnection()
+    z = Brain(neuron_len)
+    l = x.synaps
+    l[random_selected] = y.synaps[random_selected]
+    z.make_custom_connection(l)
+    return z
+
+
+
+
+
