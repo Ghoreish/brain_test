@@ -64,6 +64,13 @@ class Brain:
                 x.connect_to(self.neuron_list[j])
         self.synaps = connection_list
 
+    def output(self, *args):
+        output_list = []
+        for i in args:
+            output_list.append(self.neuron_list[i].vol)
+        return output_list
+
+
 
 def breed(x: Brain, y: Brain):
     neuron_len = len(x.neuron_list)
