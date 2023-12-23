@@ -1,4 +1,5 @@
 import random
+import json
 
 
 class Neuron:
@@ -73,6 +74,16 @@ class Brain:
         else:
             return output_list
 
+    def reset(self):
+        for i in self.neuron_list:
+            i.vol = 0
+
+    def save(self):
+        return json.dumps(self.synaps)
+
+    def load(self, syn: str):
+        synaps = json.loads(syn)
+        self.make_custom_connection(synaps)
 
 
 def breed(x: Brain, y: Brain):
