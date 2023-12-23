@@ -68,7 +68,10 @@ class Brain:
         output_list = []
         for i in args:
             output_list.append(self.neuron_list[i].vol)
-        return output_list
+        if len(output_list) == 1:
+            return output_list[0]
+        else:
+            return output_list
 
 
 
