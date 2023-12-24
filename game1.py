@@ -133,14 +133,15 @@ while True:
         time.sleep(2)
         selected = []
         for i in x.player_list:
-            if i.point > 3:
+            if i.point > 2:
                 selected.append(i)
                 print(i.player_id)
         time.sleep(2)
         new_gens = []
-        for i in range(1, len(selected)):
+        for i in range(0, len(selected)):
             new_player = Player(0, 0, 10)
-            new_player.brain = breed(selected[i].brain, selected[i - 1].brain)
+            for j in x.player_list:
+                new_player.brain = breed(selected[i].brain, j.brain)
             new_gens.append(new_player)
         for i in selected:
             i.place = [0, 0]
@@ -153,6 +154,8 @@ while True:
             p = Player(0, 0, 10)
             p.brain.make_random_cnnection()
             new_gens.append(p)
+        while len(new_gens) > 10:
+            new_gens.remove(random.choice(new_gens))
         x = Game(10)
         x.add_bounties(10)
         if len(new_gens) > 10:
