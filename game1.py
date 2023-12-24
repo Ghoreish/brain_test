@@ -158,8 +158,8 @@ while True:
             new_player = Player(0, 0, 10)
             new_player.brain.make_random_cnnection()
             new_gens.append(new_player)
-        while len(new_gens) > 10:
-            new_gens.remove(random.choice(new_gens[9:]))
+        if len(new_gens) > 10:
+            new_gens = new_gens[:10]
         x = Game(10)
         x.add_bounties(10)
         for i in new_gens:
