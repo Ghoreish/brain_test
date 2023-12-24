@@ -133,16 +133,16 @@ while True:
         time.sleep(2)
         selected = []
         for i in x.player_list:
-            if i.point > 2:
+            if i.point > 3:
                 selected.append(i)
                 print(i.player_id)
         time.sleep(2)
         new_gens = []
         for i in range(0, len(selected)):
-            new_player = Player(0, 0, 10)
             for j in x.player_list:
+                new_player = Player(0, 0, 10)
                 new_player.brain = breed(selected[i].brain, j.brain)
-            new_gens.append(new_player)
+                new_gens.append(new_player)
         for i in selected:
             i.place = [0, 0]
             i.point = 0
