@@ -37,7 +37,7 @@ class Game:
             x = random.randint(0, len(self.plan) - 1)
             y = random.randint(0, len(self.plan) - 1)
             self.plan[x][y] = 99
-            bounty_list.add((x,y))
+            bounty_list.add((x, y))
 
     def raw_plan(self):
         sample_plan = copy.deepcopy(self.plan)
@@ -59,6 +59,7 @@ class Game:
 
 class Player:
     gen_id = 0
+
     def __init__(self, x, y, n):
         Player.gen_id += 1
         self.player_id = Player.gen_id
@@ -139,26 +140,15 @@ while True:
         time.sleep(2)
         new_gens = []
         for i in selected:
-            for j in x.player_list:
+            for j in selected:
                 new_player = Player(0, 0, 10)
                 new_player.brain = breed(i.brain, j.brain)
                 new_gens.append(new_player)
-        for i in selected:
-            i.place = [0, 0]
-            i.point = 0
-            new_gens.append(i)
-            new_player = Player(0, 0, 10)
-            new_player.brain = mut(i.brain)
-            new_gens.append(new_player)
+                new_player.brain = mut(new_player.brain)
+                new_gens.append(new_player)
         while len(new_gens) < 10:
-            p = Player(0, 0, 10)
-            p.brain.make_random_cnnection()
-            new_gens.append(p)
+            new_gens.append(Player(0, 0, 10))
         while len(new_gens) > 10:
             new_gens.remove(random.choice(new_gens))
-        x = Game(10)
-        x.add_bounties(10)
-        if len(new_gens) > 10:
-            new_gens = new_gens[:10]
         for i in new_gens:
             x.add_player(i)
