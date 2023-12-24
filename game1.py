@@ -162,4 +162,5 @@ while True:
         x.add_bounties(10)
         for i in new_gens:
             x.add_player(i)
+        timer = time.time()
 
