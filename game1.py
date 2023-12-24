@@ -54,7 +54,7 @@ class Game:
             n = self.plan[i.place[0]][i.place[1]]
             if n == 99:
                 i.point += 1
-                self.plan[i.place[0]][i.place[1]] = 1
+                self.plan[i.place[0]][i.place[1]] = 10
 
 
 class Player:
