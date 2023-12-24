@@ -138,10 +138,10 @@ while True:
                 print(i.player_id)
         time.sleep(2)
         new_gens = []
-        for i in range(0, len(selected)):
+        for i in selected:
             for j in x.player_list:
                 new_player = Player(0, 0, 10)
-                new_player.brain = breed(selected[i].brain, j.brain)
+                new_player.brain = breed(i.brain, j.brain)
                 new_gens.append(new_player)
         for i in selected:
             i.place = [0, 0]
