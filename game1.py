@@ -87,6 +87,8 @@ class Player:
     def process(self, raw_plan):
         for i in range(len(raw_plan)):
             self.brain.pulse_to(i, raw_plan[i])
+        loc_in_raw = self.place[0] * 10 + self.place[1]
+        self.brain.pulse_to(loc_in_raw, 500)
         self.brain.start_pulsing()
         x, y = self.brain.output(0, 1)
         while x >= 2 and y >= 2:
