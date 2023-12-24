@@ -133,7 +133,7 @@ while True:
         time.sleep(2)
         selected = []
         for i in x.player_list:
-            if i.point > 4:
+            if i.point > 3:
                 selected.append(i)
                 print(i.player_id)
         time.sleep(2)
