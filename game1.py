@@ -54,7 +54,7 @@ class Game:
             n = self.plan[i.place[0]][i.place[1]]
             if n == 99:
                 i.point += 1
-                self.plan[i.place[0]][i.place[1]] = 10
+                self.plan[i.place[0]][i.place[1]] = 1
 
 
 class Player:
@@ -110,7 +110,9 @@ for i in range(10):
     x.add_player(player)
 
 generation = 0
+timer = time.time()
 while True:
+    timeout = 0
     for i in x.player_list:
         i.process(x.raw_plan())
     x.calc_points()
@@ -122,7 +124,9 @@ while True:
     print('points:', n)
     print('generation:', generation)
     time.sleep(0.1)
-    if 99 not in x.raw_plan():
+    if time.time() - timer > 30:
+        timeout = 1
+    if 99 not in x.raw_plan() or timeout == 1:
         generation += 1
         point_list = []
         for i in x.player_list:
@@ -134,7 +138,7 @@ while True:
         time.sleep(2)
         selected = []
         for i in x.player_list:
-            if i.point > 3:
+            if i.point > 1:
                 selected.append(i)
                 print(i.player_id)
         time.sleep(2)
@@ -144,11 +148,18 @@ while True:
                 new_player = Player(0, 0, 10)
                 new_player.brain = breed(i.brain, j.brain)
                 new_gens.append(new_player)
+                new_player = Player(0, 0, 10)
+                new_player.brain = breed(i.brain, j.brain)
                 new_player.brain = mut(new_player.brain)
                 new_gens.append(new_player)
         while len(new_gens) < 10:
-            new_gens.append(Player(0, 0, 10))
+            new_player = Player(0, 0, 10)
+            new_player.brain.make_random_cnnection()
+            new_gens.append(new_player)
         while len(new_gens) > 10:
-            new_gens.remove(random.choice(new_gens))
+            new_gens.remove(random.choice(new_gens[9:]))
+        x = Game(10)
+        x.add_bounties(10)
         for i in new_gens:
             x.add_player(i)
+
