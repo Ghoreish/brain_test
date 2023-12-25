@@ -129,6 +129,8 @@ while True:
     if time.time() - timer > 30:
         timeout = 1
     if 99 not in x.raw_plan() or timeout == 1:
+        if timeout == 1:
+            print('timeout!!!')
         generation += 1
         point_list = []
         for i in x.player_list:
@@ -146,7 +148,13 @@ while True:
         time.sleep(2)
         new_gens = []
         for i in selected:
+            i.brain.reset()
+            i.point = 0
+            new_gens.append(i)
+        for i in selected:
             for j in selected:
+                if i == j:
+                    continue
                 new_player = Player(0, 0, 10)
                 new_player.brain = breed(i.brain, j.brain)
                 new_gens.append(new_player)
