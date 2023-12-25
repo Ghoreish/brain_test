@@ -91,7 +91,7 @@ class Player:
         self.brain.pulse_to(loc_in_raw, 50)
         self.brain.start_pulsing()
         x, y = self.brain.output(0, 1)
-        while x >= 2 and y >= 2:
+        while x >= 2 or y >= 2:
             self.brain.start_pulsing()
             x, y = self.brain.output(0, 1)
         if x == 0 and y == 0:
