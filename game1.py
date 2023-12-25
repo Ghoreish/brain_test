@@ -125,6 +125,7 @@ while True:
     x.show_plan()
     print('points:', n)
     print('generation:', generation)
+    print("timer:", int(time.time() - timer))
     time.sleep(0.1)
     if time.time() - timer > 30:
         timeout = 1
